@@ -16,15 +16,29 @@ const criaNovaLinha = (nome, email) => {
 
 const tabela = document.querySelector("[data-tabela]");
 
-const http = new XMLHttpRequest(); // Objeto que fornece alguns métodos para fazer a comunicação entre a aplicação e a API
+const listaClientes = () => {
+  const promise = new Promise((resolve, reject) => {
+    const http = new XMLHttpRequest(); // Objeto que fornece alguns métodos para fazer a comunicação entre a aplicação e a API
 
-http.open("GET", "http://localhost:3000/profile"); //abre a comunicação entre a minha aplicação e a API.
+    http.open("GET", "http://localhost:3000/profile"); //abre a comunicação entre a minha aplicação e a API.
 
-http.send();
-
-http.onload = () => {
-  const data = JSON.parse(http.response);
-  data.forEach((elemento) => {
-    tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email));
+    http.onload = () => {
+      if (http.status >= 400) {
+        reject(JSON.parse(http.response));
+      } else {
+        resolve(JSON.parse(http.response));
+      }
+    };
+    http.send();
   });
+  console.log(promise); // para exibir o que está dentro da promise
+  return promise;
 };
+
+listaClientes() // Chamando a função para ser executada
+  .then((data) => {
+    // Já sabe automaticamente que estou me referindo a função listaClientes
+    data.forEach((elemento) => {
+      tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email));
+    });
+  });

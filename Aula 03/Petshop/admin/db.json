@@ -1,0 +1,19 @@
+{
+  "profile": [
+    {
+      "nome": "Gustavo",
+      "email": "gmolina@blueedtech.com.br",
+      "id": 1
+    },
+    {
+      "nome": "Jorginho",
+      "email": "jorginho@gmail.com",
+      "id": 2
+    },
+    {
+      "nome": "Avestruz que te seduz",
+      "email": "ricardoalexdel@gmail.com",
+      "id": 3
+    }
+  ]
+}

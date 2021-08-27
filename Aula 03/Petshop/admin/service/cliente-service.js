@@ -1,17 +1,36 @@
-//
-
-// json-server --watch db.json
+// json-server --watch db.json ( deve sempre rodar dentro da pasta admin)
 
 // Fetch --> é um metodo global da interface da fetch API. Por padrão o fetch já faz o get e devolve uma promise
 
-// Objeto que vai receber listaClientes
-
 const listaClientes = () => {
-  return fetch(`http://localhost:3000/profile`).then(resposta => {
-    return resposta.json()
+  return fetch(`http://localhost:3000/profile`).then((resposta) => {
+    return resposta.json();
+  });
+};
+
+const criaCliente = (nome, email) => {
+  return fetch(`http://localhost:3000/profile`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nome: nome,
+      email: email,
+    }),
+  }).then((resposta) => {
+    return resposta.body;
+  });
+};
+
+const removeCliente = (id) => {
+  return fetch(`http://localhost:3000/profile/${id}`, {
+    method: "DELETE",
   });
 };
 
 export const clienteService = {
   listaClientes,
+  criaCliente,
+  removeCliente,
 };

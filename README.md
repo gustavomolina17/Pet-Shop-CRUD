@@ -1,1 +1,1 @@
-#  JS na web: crud com JavaScript assíncrono
+#  Crud de Petshop feito 100% com HTML + CSS + JS
